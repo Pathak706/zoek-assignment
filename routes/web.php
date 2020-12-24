@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('company');
 });
 
 Auth::routes(
@@ -24,5 +24,8 @@ Auth::routes(
         'verify' => false, // Email Verification Routes...
     ]
 );
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('company', 'CompanyController');
+    Route::resource('employees', 'EmployeesController');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');

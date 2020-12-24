@@ -1,23 +1,23 @@
-@extends('layouts.app')
+@extends('layouts.layout')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+@section('title','Dashboard')
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+@section('button')
 
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
+    <div class="navbar-wrapper">
+        <div class="navbar-toggle">
+            <button type="button" class="navbar-toggler">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+            </button>
         </div>
+        <h3 class="title">Assets</h3>
+@endsection
+@section('content')
+<section class="data-table-wrap">
+    <div class="card">
+
     </div>
-</div>
+</section>
 @endsection
