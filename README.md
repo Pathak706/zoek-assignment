@@ -16,13 +16,13 @@
  -  Use Laravel’s pagination for showing Companies/Employees list, 10 entries per page
  -  Use Laravel make:auth as default Bootstrap-based design theme, but remove ability to register
 
-#TASK - 2 (FizzBuzz)
+# TASK - 2 (FizzBuzz)
  In the Laravel app, create a page that prints the numbers from 1 to 100.
  But for multiples of three output “Fizz” instead of the number and for the multiples of five
  output “Buzz”.
  For numbers which are multiples of both three and five output “FizzBuzz”.
 
-#TASK - 3 (Valid Triangle)
+# TASK - 3 (Valid Triangle)
  - Create a page that clearly states what it does (checks if the 3 lengths would form a valid triangle) and
    how to use the app.
  - Use the above information to check if what they enter is valid or not (all side lengths will be less than
