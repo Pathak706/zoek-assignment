@@ -205,6 +205,16 @@ table.dataTable thead .sorting_asc{
     width: 50px !important;
 }
 
+#edit_company__logo, #company__logo {
+    width: 150px;
+    margin-top: 3em;
+    margin-bottom: 1em;
+}
+
+.company-logo {
+    width: 100px;
+}
+
 /*
 .images {
     width: 360px;

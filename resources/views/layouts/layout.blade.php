@@ -42,40 +42,41 @@
 </head>
 
 <body>
-    <div class="wrapper">
-        @if(count($errors) > 0)
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{$error}}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <div class="sidebar" data-color="blue">
-            {{--
-            Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
-            --}}
-            <div class="logo">
-                <a href="#" class="simple-text">{{ config('app.name', 'ZOEK') }}</a>
-            </div>
-            <div class="sidebar-wrapper" id="sidebar-wrapper">
-                <ul class="nav">
-                    <li class="no-edit">
-                        <a href='{{ route('company.index') }}' id ='company'>
-                            <i class="now-ui-icons design_app"></i>
-                            <p>Company</p>
-                        </a>
-                    </li>
-                    <li class="no-edit">
-                        <a href='{{ route('employees.index') }}' id ='employees'>
-                            <i class="now-ui-icons design_app"></i>
-                            <p>Employees</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+    @if(session()->has('error'))
+        <div class="alert alert-danger" id="error_alert">
+            {{ session()->get('error') }}
         </div>
+    @endif
+    @if(session()->has('success'))
+        <div class="alert alert-success" id="success_alert">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+    <div class="wrapper">
+        <div class="sidebar" data-color="blue">
+        {{--
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+        --}}
+        <div class="logo">
+            <a href="#" class="simple-text">{{ config('app.name', 'ZOEK') }}</a>
+        </div>
+        <div class="sidebar-wrapper" id="sidebar-wrapper">
+            <ul class="nav">
+                <li class="no-edit">
+                    <a href='{{ route('company.index') }}' id ='company'>
+                        <i class="now-ui-icons design_app"></i>
+                        <p>Company</p>
+                    </a>
+                </li>
+                <li class="no-edit">
+                    <a href='{{ route('employees.index') }}' id ='employees'>
+                        <i class="now-ui-icons design_app"></i>
+                        <p>Employees</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
     </div>
     <div class="main-panel ps" id="main-panel">
         <!-- Navbar -->
@@ -147,6 +148,13 @@
 <script src='/js/main.js'></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+    setTimeout(() => {
+        $("#success_alert").css("display", "none");
+        $("#error_alert").css("display", "none");
+    }, 3000)
+
+</script>
 @yield('script')
 </body>
 </html>

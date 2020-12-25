@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Company;
 class CompanyController extends Controller
 {
     /**
@@ -13,17 +13,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return view('CRM.company');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $companies = Company::all();
+        return view('CRM.company', compact('companies'));
     }
 
     /**
@@ -34,29 +25,32 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        // validate incoming request
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+        try {
+            // check if logo is uploaded
+            $file_name = null;
+            if($request->hasFile('logo')) {
+                $file = $request->file('logo');
+                $extension = $file->getClientOriginalExtension();
+                $file_name = $request->name.'_'.time().'.'.$extension;
+                $file->move('uploads/', $file_name);
+            }
+            // save entry to database
+            Company::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'website' => $request->website,
+                'logo' => $file_name,
+            ]);
+            return redirect()->back()->with('success', 'New company created successfully.');
+        } catch (Exception $error) {
+            return redirect()->back()->with('error', 'Error occurred while creating.');
+        }
     }
 
     /**
@@ -68,7 +62,32 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // validate incoming request
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+        try {
+            // check if logo is uploaded
+            $file_name = null;
+            if($request->hasFile('logo')) {
+                $file = $request->file('logo');
+                $extension = $file->getClientOriginalExtension();
+                $file_name = $request->name.'_'.time().'.'.$extension;
+                $file->move('uploads/', $file_name);
+            }
+            // save entry to database
+            $company = Company::find($id);
+            $company->name = $request->name;
+            $company->email = $request->email;
+            $company->website = $request->website;
+            if($file_name) $company->logo = $file_name;
+            $company->update();
+            return redirect()->back()->with('success', 'Company updated successfully.');
+        } catch (Exception $error) {
+            return redirect()->back()->with('error', 'Error occurred while updating.');
+        }
     }
 
     /**
@@ -77,8 +96,13 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Company $company)
     {
-        //
+        try{
+            $company->delete();
+            return redirect()->back()->with('success', 'company record deleted successfully.');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Error occurred while delete.');
+        }
     }
 }

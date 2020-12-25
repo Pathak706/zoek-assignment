@@ -29,3 +29,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('employees', 'EmployeesController');
 });
 
+#TASK-2
+Route::get('fizz-buzz', function() {
+   return view('fizz-buzz');
+});
+#TASK-3
+Route::get('validate-triangle', function() {
+   return view('validate_triangle');
+});
