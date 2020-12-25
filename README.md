@@ -27,5 +27,4 @@
    how to use the app.
  - Use the above information to check if what they enter is valid or not (all side lengths will be less than
    the combined length of the other 2 sides).
- - Looking for good UX/UI design.
 
