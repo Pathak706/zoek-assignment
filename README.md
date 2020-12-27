@@ -28,3 +28,11 @@
  - Use the above information to check if what they enter is valid or not (all side lengths will be less than
    the combined length of the other 2 sides).
 
+# Additional 
+ - Docker file added for simple docker deployment
+ - step to set up docker instead as follows:
+    - docker-compose up
+    - docker-compose exec app php artisan key:generate
+    - docker-compose exec app php artisan config:cache
+    - docker-compose exec app php artisan migrate:fresh --seed
+    - docker-compose down
