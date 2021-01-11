@@ -21,12 +21,14 @@
  But for multiples of three output “Fizz” instead of the number and for the multiples of five
  output “Buzz”.
  For numbers which are multiples of both three and five output “FizzBuzz”.
+ - one can check it on <hostname>/fizz-buzz
 
 # TASK - 3 (Valid Triangle)
  - Create a page that clearly states what it does (checks if the 3 lengths would form a valid triangle) and
    how to use the app.
  - Use the above information to check if what they enter is valid or not (all side lengths will be less than
    the combined length of the other 2 sides).
+ - one can check it on url <hostname>/validate-triangle
 
 # Additional 
  - Docker file added for simple docker deployment
